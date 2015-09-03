@@ -60,3 +60,15 @@ main = runTest $ do
       case (runExcept res) of
         Right a -> a == "something"
         _       -> false
+
+  test "hoistMaybe" $ do
+    assert "lift Nothing" $ do
+      let maybet = hoistMaybe Nothing
+      isNothing (runIdentity <<< runMaybeT $ maybet)
+
+    assert "lift Just" $ do
+      let maybet = hoistMaybe $ Just 42
+      let unwrap = (runIdentity <<< runMaybeT $ maybet)
+      case unwrap of
+        Just n -> n == 42
+        _      -> false
