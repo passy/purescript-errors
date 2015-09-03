@@ -53,7 +53,7 @@ Convert a 'Maybe' value into the 'ExceptT' monad
 #### `(!?)`
 
 ``` purescript
-(!?) :: forall a b e m. (Applicative m) => m (Maybe a) -> e -> ExceptT e m a
+(!?) :: forall a b e m. (Apply m) => m (Maybe a) -> e -> ExceptT e m a
 ```
 
 _left-associative / precedence -1_
