@@ -6,6 +6,8 @@
 hush :: forall a b. Either a b -> Maybe b
 ```
 
+Suppress the 'Left' value of an 'Either'
+
 #### `hushT`
 
 ``` purescript

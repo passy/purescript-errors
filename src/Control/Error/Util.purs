@@ -1,3 +1,5 @@
+-- | Use these functions to convert between 'Maybe', 'Either', 'MaybeT', and
+--   'ExceptT'.
 module Control.Error.Util
   ( hush
   , hushT
@@ -15,11 +17,6 @@ import Data.Either (Either(Left, Right), either)
 import Control.Monad.Except.Trans (ExceptT(..), runExceptT)
 import Control.Monad.Maybe.Trans (MaybeT(..), runMaybeT)
 import Data.Maybe (Maybe(Just, Nothing), maybe, fromMaybe)
-
-{- $conversion
-    Use these functions to convert between 'Maybe', 'Either', 'MaybeT', and
-    'ExceptT'.
--}
 
 -- | Suppress the 'Left' value of an 'Either'
 hush :: forall a b. Either a b -> Maybe b
