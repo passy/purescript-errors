@@ -21,7 +21,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/passy/purescript-errors.git"
+    "url": "git://github.com/passy/purescript-errors.git"
   },
   "license": "Apache-2",
   "dependencies": {
