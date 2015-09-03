@@ -10,6 +10,16 @@
     "bower_components",
     "output"
   ],
+  "keywords": [
+    "purescript",
+    "monad",
+    "errors",
+    "combinators"
+  ],
+  "authors": [
+    "Pascal Hartig <phartig@rdrei.net>"
+  ],
+  "license": "Apache-2",
   "dependencies": {
     "purescript-either": "~0.2.2",
     "purescript-maybe": "~0.3.4",
