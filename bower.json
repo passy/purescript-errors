@@ -19,6 +19,10 @@
   "authors": [
     "Pascal Hartig <phartig@rdrei.net>"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/passy/purescript-errors.git"
+  },
   "license": "Apache-2",
   "dependencies": {
     "purescript-either": "~0.2.2",
