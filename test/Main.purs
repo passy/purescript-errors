@@ -9,6 +9,11 @@ import Control.Monad.Except
 import Control.Monad.Maybe.Trans
 import Data.Identity
 
+type MaybeId a = MaybeT Identity a
+
+maybeId :: forall a. Maybe a -> MaybeId a
+maybeId = MaybeT <<< Identity
+
 main = runTest $ do
   test "hush" $ do
     assert "Right is Just" $ case (hush $ Right 5) of
@@ -40,5 +45,18 @@ main = runTest $ do
     assert "Just is Right a" $ do
       let res = note "nothing" $ Just "something"
       case res of
+        Right a -> a == "something"
+        _       -> false
+
+  test "noteT" $ do
+    assert "Nothing is Left a" $ do
+      let res = noteT "nothing" $ maybeId Nothing
+      case (runExcept res) of
+        Left a -> a == "nothing"
+        _      -> false
+
+    assert "Just is Right a" $ do
+      let res = noteT "nothing" $ maybeId $ Just "something"
+      case (runExcept res) of
         Right a -> a == "something"
         _       -> false
