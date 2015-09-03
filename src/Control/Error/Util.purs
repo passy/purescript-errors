@@ -43,7 +43,7 @@ hoistMaybe = MaybeT <<< return
 (??) a e = ExceptT (pure $ note e a)
 
 -- | Convert an applicative 'Maybe' value into the 'ExceptT' monad
-(!?) :: forall a b e m. (Applicative m) => m (Maybe a) -> e -> ExceptT e m a
+(!?) :: forall a b e m. (Apply m) => m (Maybe a) -> e -> ExceptT e m a
 (!?) a e = ExceptT (note e <$> a)
 
 -- | An infix form of 'fromMaybe' with arguments flipped.
