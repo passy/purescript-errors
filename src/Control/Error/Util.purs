@@ -1,5 +1,12 @@
 module Control.Error.Util
   ( hush
+  , hushT
+  , note
+  , noteT
+  , hoistMaybe
+  , (??)
+  , (!?)
+  , (?:)
   )
 where
 
