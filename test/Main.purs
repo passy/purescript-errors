@@ -72,3 +72,22 @@ main = runTest $ do
       case unwrap of
         Just n -> n == 42
         _      -> false
+
+  test "(??)" $ do
+    assert "Nothing to ExceptT" $ do
+      let res = Nothing ?? "nothing"
+      let unwrap = runExcept res
+      case unwrap of
+        Left a -> a == "nothing"
+        _      -> false
+
+    assert "Just to ExceptT" $ do
+      let res = Just "something" ?? "nothing"
+      let unwrap = runExcept res
+      case unwrap of
+        Right a -> a == "something"
+        _       -> false
+
+  test "(?:)" $ do
+    assert "from Nothing" $ (Nothing ?: "nothing") == "nothing"
+    assert "from Just" $ (Just "something" ?: "nothing") == "something"
