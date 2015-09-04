@@ -7,3 +7,9 @@
 > library](https://github.com/Gabriel439/Haskell-Errors-Library) for Haskell.
 
 - [Module documentation](docs/Control/Error/Util.md)
+
+## About that "partial"
+
+`Control.Error.Safe` has not been ported since `purescript-lists` and
+`purescript-arrays` provide safe alternatives by default. `Control.Error.Script`
+relies on platform-specific features not available in PureScript.
