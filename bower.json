@@ -27,9 +27,12 @@
   "dependencies": {
     "purescript-either": "~0.2.2",
     "purescript-maybe": "~0.3.4",
-    "purescript-transformers": "~0.7.1"
+    "purescript-transformers": "~0.8.1"
   },
   "devDependencies": {
     "purescript-test-unit": "passy/purescript-test-unit#ee3450eb9aeaa15752c22a9cc0ff558214e557b6"
+  },
+  "resolutions": {
+    "purescript-transformers": "~0.8.1"
   }
 }
