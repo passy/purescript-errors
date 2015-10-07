@@ -30,9 +30,6 @@
     "purescript-transformers": "~0.8.1"
   },
   "devDependencies": {
-    "purescript-test-unit": "^2.0.1"
-  },
-  "resolutions": {
-    "purescript-transformers": "~0.8.1"
+    "purescript-test-unit": "^3.0.0"
   }
 }
