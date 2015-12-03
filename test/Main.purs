@@ -4,7 +4,9 @@ import Prelude
 import Data.Either (Either(..))
 import Data.Maybe (Maybe(..), isNothing)
 import Test.Unit
+import Test.Unit.Console
 import Control.Error.Util
+import Control.Monad.Eff
 import Control.Monad.Except
 import Control.Monad.Maybe.Trans
 import Data.Identity
@@ -14,6 +16,7 @@ type MaybeId a = MaybeT Identity a
 maybeId :: forall a. Maybe a -> MaybeId a
 maybeId = MaybeT <<< Identity
 
+main :: forall eff. Eff ( testOutput :: TestOutput | eff ) Unit
 main = runTest $ do
   test "hush" $ do
     assert "Right is Just" $ case (hush $ Right 5) of
