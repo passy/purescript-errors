@@ -35,7 +35,7 @@ Tag the 'Nothing' value of a 'MaybeT'
 #### `hoistMaybe`
 
 ``` purescript
-hoistMaybe :: forall a b m. (Monad m) => Maybe b -> MaybeT m b
+hoistMaybe :: forall b m. (Monad m) => Maybe b -> MaybeT m b
 ```
 
 Lift a 'Maybe' to the 'MaybeT' monad
@@ -43,7 +43,7 @@ Lift a 'Maybe' to the 'MaybeT' monad
 #### `(??)`
 
 ``` purescript
-(??) :: forall a b e m. (Applicative m) => Maybe a -> e -> ExceptT e m a
+(??) :: forall a e m. (Applicative m) => Maybe a -> e -> ExceptT e m a
 ```
 
 _left-associative / precedence -1_
@@ -53,7 +53,7 @@ Convert a 'Maybe' value into the 'ExceptT' monad
 #### `(!?)`
 
 ``` purescript
-(!?) :: forall a b e m. (Apply m) => m (Maybe a) -> e -> ExceptT e m a
+(!?) :: forall a e m. (Apply m) => m (Maybe a) -> e -> ExceptT e m a
 ```
 
 _left-associative / precedence -1_
