@@ -2,13 +2,13 @@
 
 [![Latest release](http://img.shields.io/bower/v/purescript-errors.svg)](https://github.com/passy/purescript-errors/releases)
 [![Build Status](https://travis-ci.org/passy/purescript-errors.svg?branch=master)](https://travis-ci.org/passy/purescript-errors)
-[![Pursuit](http://pursuit.purescript.org/packages/purescript-errors/badge)](http://pursuit.purescript.org/packages/purescript-errors)
 [![Dependency Status](https://www.versioneye.com/user/projects/55e9948a211c6b001f000de3/badge.svg?style=flat)](https://www.versioneye.com/user/projects/55e9948a211c6b001f000de3)
 
-> A partial port of Gabriel Gonzales' [errors
+> A partial port of Gabriel Gonzalez' [errors
 > library](https://github.com/Gabriel439/Haskell-Errors-Library) for Haskell.
 
 - [Module documentation](docs/Control/Error/Util.md)
+- [Pursuit](http://pursuit.purescript.org/packages/purescript-errors)
 
 ## About that "partial"
 
