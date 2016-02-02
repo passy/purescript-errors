@@ -1,5 +1,7 @@
 ## Module Control.Error.Util
 
+Use these functions to convert between 'Maybe', 'Either', 'MaybeT', and
+
 #### `hush`
 
 ``` purescript
