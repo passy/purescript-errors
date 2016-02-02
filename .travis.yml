@@ -5,6 +5,7 @@ node_js:
 env:
   - PATH=$HOME/purescript:$PATH
 install:
+  - npm install -g bower
   - npm install
 script:
   - npm test
