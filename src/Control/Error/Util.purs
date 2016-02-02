@@ -12,7 +12,9 @@ module Control.Error.Util
   )
 where
 
-import Prelude
+import Prelude ( class Apply, class Applicative, class Monad
+               , (<$>), pure, ($), return, (<<<), liftM1, const
+               )
 import Data.Either (Either(Left, Right), either)
 import Control.Monad.Except.Trans (ExceptT(..), runExceptT)
 import Control.Monad.Maybe.Trans (MaybeT(..), runMaybeT)
