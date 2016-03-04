@@ -9,11 +9,15 @@ module Control.Error.Util
   , (??)
   , (!?)
   , (?:)
+  , fromMaybe'
+  , exceptNoteA
+  , exceptNoteM
   )
 where
 
 import Prelude ( class Apply, class Applicative, class Monad
                , (<$>), pure, ($), return, (<<<), liftM1, const
+               , flip
                )
 import Data.Either (Either(Left, Right), either)
 import Control.Monad.Except.Trans (ExceptT(..), runExceptT)
@@ -41,13 +45,19 @@ hoistMaybe :: forall b m. (Monad m) => Maybe b -> MaybeT m b
 hoistMaybe = MaybeT <<< return
 
 -- | Convert a 'Maybe' value into the 'ExceptT' monad
-(??) :: forall a e m. (Applicative m) => Maybe a -> e -> ExceptT e m a
-(??) a e = ExceptT (pure $ note e a)
+exceptNoteM :: forall a e m. (Applicative m) => Maybe a -> e -> ExceptT e m a
+exceptNoteM a e = ExceptT (pure $ note e a)
+
+infixl 9 exceptNoteM as ??
 
 -- | Convert an applicative 'Maybe' value into the 'ExceptT' monad
-(!?) :: forall a e m. (Apply m) => m (Maybe a) -> e -> ExceptT e m a
-(!?) a e = ExceptT (note e <$> a)
+exceptNoteA :: forall a e m. (Apply m) => m (Maybe a) -> e -> ExceptT e m a
+exceptNoteA a e = ExceptT (note e <$> a)
+
+infixl 9 exceptNoteA as !?
 
 -- | An infix form of 'fromMaybe' with arguments flipped.
-(?:) :: forall a. Maybe a -> a -> a
-(?:) maybeA b = fromMaybe b maybeA
+fromMaybe' :: forall a. Maybe a -> a -> a
+fromMaybe' = flip fromMaybe
+
+infixl 9 fromMaybe' as ?:
