@@ -42,34 +42,51 @@ hoistMaybe :: forall b m. (Monad m) => Maybe b -> MaybeT m b
 
 Lift a 'Maybe' to the 'MaybeT' monad
 
+#### `exceptNoteM`
+
+``` purescript
+exceptNoteM :: forall a e m. (Applicative m) => Maybe a -> e -> ExceptT e m a
+```
+
+Convert a 'Maybe' value into the 'ExceptT' monad
+
 #### `(??)`
 
 ``` purescript
-(??) :: forall a e m. (Applicative m) => Maybe a -> e -> ExceptT e m a
+infixl 9 exceptNoteM as ??
 ```
 
-_left-associative / precedence -1_
+_left-associative / precedence 9_
 
-Convert a 'Maybe' value into the 'ExceptT' monad
+#### `exceptNoteA`
+
+``` purescript
+exceptNoteA :: forall a e m. (Apply m) => m (Maybe a) -> e -> ExceptT e m a
+```
+
+Convert an applicative 'Maybe' value into the 'ExceptT' monad
 
 #### `(!?)`
 
 ``` purescript
-(!?) :: forall a e m. (Apply m) => m (Maybe a) -> e -> ExceptT e m a
+infixl 9 exceptNoteA as !?
 ```
 
-_left-associative / precedence -1_
+_left-associative / precedence 9_
 
-Convert an applicative 'Maybe' value into the 'ExceptT' monad
+#### `fromMaybe'`
+
+``` purescript
+fromMaybe' :: forall a. Maybe a -> a -> a
+```
+
+An infix form of 'fromMaybe' with arguments flipped.
 
 #### `(?:)`
 
 ``` purescript
-(?:) :: forall a. Maybe a -> a -> a
+infixl 9 fromMaybe' as ?:
 ```
 
-_left-associative / precedence -1_
-
-An infix form of 'fromMaybe' with arguments flipped.
-
+_left-associative / precedence 9_
 
