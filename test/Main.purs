@@ -1,9 +1,9 @@
 module Test.Main where
 
-import Prelude (Unit, (==), ($), bind, (<<<))
+import Prelude (Unit, (==), ($), bind, (<<<), (<$>))
 import Control.Monad.Aff.AVar (AVAR)
 import Data.Either (Either(..))
-import Data.Maybe (Maybe(..), isNothing)
+import Data.Maybe (Maybe(..), fromMaybe, isNothing)
 import Test.Unit (TIMER, test, runTest)
 import Test.Unit.Console (TESTOUTPUT)
 import Test.Unit.Assert as Assert
@@ -19,14 +19,15 @@ type MaybeId a = MaybeT Identity a
 maybeId :: forall a. Maybe a -> MaybeId a
 maybeId = MaybeT <<< Identity
 
+testMaybe :: forall a. (a -> Boolean) -> Maybe a -> Boolean
+testMaybe f a = fromMaybe false (f <$> a)
+
 main :: forall eff. Eff ( timer :: TIMER
                         , avar :: AVAR
                         , testOutput :: TESTOUTPUT | eff ) Unit
 main = runTest $ do
   test "hush" $ do
-    Assert.assert "Right is Just" $ case (hush $ Right 5) of
-      Just n -> n == 5
-      _      -> false
+    Assert.assert "Right is Just" $ testMaybe (_ == 5) (hush $ Right 5)
     Assert.assert "Left is Nothing" $ isNothing (hush $ Left 5)
 
   test "hushT" $ do
@@ -35,9 +36,7 @@ main = runTest $ do
 
     Assert.assert "Except Right is Just" $ do
       let res = runIdentity <<< runMaybeT <<< hushT $ exR
-      case res of
-        Just str -> str == "right"
-        _        -> false
+      testMaybe (_ == "right") res
 
     Assert.assert "Except Left is Nothing" $ do
       let res = runIdentity <<< runMaybeT <<< hushT $ exL
