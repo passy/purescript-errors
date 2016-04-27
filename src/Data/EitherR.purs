@@ -5,9 +5,9 @@
 -- | `catchEither` differ from `MonadError` (`cacheError`) - `catchEither` is
 -- | more general as it allows you to cahnge the left value's type.
 -- |
--- | `throwEither` is just `throwError` but left for consistency.
+-- | `throwEither` is just `throwError` but exists here for consistency.
 -- |
--- | More advanced users can use 'EitherR' and 'ExceptRT' to program in an
+-- | More advanced users can use `EitherR` and `ExceptRT` to program in an
 -- | entirely symmetric \"success monad\" where exceptional results are the norm
 -- | and successful results terminate the computation.  This allows you to chain
 -- | error-handlers using @do@ notation and pass around exceptional values of
@@ -20,7 +20,7 @@
 -- |
 -- | If any of the above error handlers 'succeed', no other handlers are tried.
 -- | If you choose not to typefully distinguish between the error and sucess
--- | monad, then use 'flipEither' and 'flipET', which swap the type variables without
+-- | monad, then use `flipEither` and `flipET`, which swap the type variables without
 -- | changing the type.
 
 
@@ -174,9 +174,10 @@ instance monadEffExceptRT :: (MonadEff eff m) => MonadEff eff (ExceptRT r m) whe
 succeedT :: forall e m r. (Monad m) => r -> ExceptRT r m e
 succeedT r = ExceptRT (return r)
 
--- fmapLT is implemented in purscript Control.Monad.Except.Trans.withExceptT
--- but it is left here for consitency reason and as counterpart for `fmapL`
-fmapLT :: forall a b m r. (Monad m) => (a -> b) -> ExceptT a m r -> ExceptT b m r
+-- | Modify `ExceptT` error value
+-- | The same as `Control.Monad.Except.Trans.withExceptT`, but left
+-- | here for module API consistency.
+fmapLT :: forall e e' m r. (Monad m) => (e -> e') -> ExceptT e m r -> ExceptT e' m r
 fmapLT f = runExceptRT <<< liftM1 f <<< ExceptRT
 
 flipET :: forall a m r. (Monad m) => ExceptT a m r -> ExceptT r m a
