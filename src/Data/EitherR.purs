@@ -36,6 +36,8 @@ module EitherR
   , ExceptRT(..)
   , runExceptRT
   , succeedT
+  , fmapLT
+  , flipET
   )
 where
 
