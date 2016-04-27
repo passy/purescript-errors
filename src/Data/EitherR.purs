@@ -24,7 +24,7 @@
 -- | changing the type.
 
 
-module EitherR
+module Data.EitherR
   ( EitherR(..)
   , runEitherR
   , succeed
