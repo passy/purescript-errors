@@ -1,5 +1,5 @@
--- | Use these functions to convert between 'Maybe', 'Either', 'MaybeT', and
---   'ExceptT'.
+-- | Use these functions to convert between `Maybe`, `Either`, `MaybeT`, and
+-- | `ExceptT`.
 module Control.Error.Util
   ( hush
   , hushT
@@ -24,39 +24,39 @@ import Control.Monad.Except.Trans (ExceptT(..), runExceptT)
 import Control.Monad.Maybe.Trans (MaybeT(..), runMaybeT)
 import Data.Maybe (Maybe(Just, Nothing), maybe, fromMaybe)
 
--- | Suppress the 'Left' value of an 'Either'
+-- | Suppress the `Left` value of an `Either`
 hush :: forall a b. Either a b -> Maybe b
 hush = either (const Nothing) Just
 
--- | Suppress the 'Left' value of an 'ExceptT'
+-- | Suppress the `Left` value of an `ExceptT`
 hushT :: forall a b m. (Monad m) => ExceptT a m b -> MaybeT m b
 hushT = MaybeT <<< liftM1 hush <<< runExceptT
 
--- | Tag the 'Nothing' value of a 'Maybe'
+-- | Tag the `Nothing` value of a `Maybe`
 note :: forall a b. a -> Maybe b -> Either a b
 note a = maybe (Left a) Right
 
--- | Tag the 'Nothing' value of a 'MaybeT'
+-- | Tag the `Nothing` value of a `MaybeT`
 noteT :: forall a b m. (Monad m) => a -> MaybeT m b -> ExceptT a m b
 noteT a = ExceptT <<< liftM1 (note a) <<< runMaybeT
 
--- | Lift a 'Maybe' to the 'MaybeT' monad
+-- | Lift a `Maybe` to the `MaybeT` monad
 hoistMaybe :: forall b m. (Monad m) => Maybe b -> MaybeT m b
 hoistMaybe = MaybeT <<< return
 
--- | Convert a 'Maybe' value into the 'ExceptT' monad
+-- | Convert a `Maybe` value into the `ExceptT` monad
 exceptNoteM :: forall a e m. (Applicative m) => Maybe a -> e -> ExceptT e m a
 exceptNoteM a e = ExceptT (pure $ note e a)
 
 infixl 9 exceptNoteM as ??
 
--- | Convert an applicative 'Maybe' value into the 'ExceptT' monad
+-- | Convert an applicative `Maybe` value into the `ExceptT` monad
 exceptNoteA :: forall a e m. (Apply m) => m (Maybe a) -> e -> ExceptT e m a
 exceptNoteA a e = ExceptT (note e <$> a)
 
 infixl 9 exceptNoteA as !?
 
--- | An infix form of 'fromMaybe' with arguments flipped.
+-- | An infix form of `fromMaybe` with arguments flipped.
 fromMaybe' :: forall a. Maybe a -> a -> a
 fromMaybe' = flip fromMaybe
 
