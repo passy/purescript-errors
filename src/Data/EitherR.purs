@@ -2,15 +2,15 @@
 -- | functions reside here because `throwEither` and `catchEither` correspond
 -- | to `return` and `bind` for flipped `Either` monad: `EitherR`.
 -- |
--- | `catchEither` differ from `MonadError` (`cacheError`) - `catchEither` is
+-- | `catchEither` differs from `MonadError` (`cacheError`) - `catchEither` is
 -- | more general as it allows you to cahnge the left value's type.
 -- |
 -- | `throwEither` is just `throwError` but exists here for consistency.
 -- |
 -- | More advanced users can use `EitherR` and `ExceptRT` to program in an
--- | entirely symmetric \"success monad\" where exceptional results are the norm
+-- | entirely symmetric "success monad" where exceptional results are the norm
 -- | and successful results terminate the computation.  This allows you to chain
--- | error-handlers using @do@ notation and pass around exceptional values of
+-- | error-handlers using `do` notation and pass around exceptional values of
 -- | varying types until you can finally recover from the error:
 -- |
 -- |     runExceptRT $ do
@@ -118,13 +118,13 @@ handleEither = flip catchEither
 fmapL :: forall e e' r. (e -> e') -> Either e r -> Either e' r
 fmapL f e = runEitherR (f <$> EitherR e)
 
--- | Flip the type variables of 'Either'
+-- | Flip the type variables of `Either`
 flipEither :: forall a b. Either a b -> Either b a
 flipEither e = case e of
     Left  a -> Right a
     Right b -> Left b
 
--- | 'EitherR' converted into a monad transformer
+-- | `EitherR` converted into a monad transformer
 newtype ExceptRT r m e = ExceptRT (ExceptT e m r)
 
 runExceptRT :: forall e m r. ExceptRT r m e -> ExceptT e m r

@@ -1,6 +1,7 @@
 ## Module Control.Error.Util
 
-Use these functions to convert between 'Maybe', 'Either', 'MaybeT', and
+Use these functions to convert between `Maybe`, `Either`, `MaybeT`, and
+`ExceptT`.
 
 #### `hush`
 
@@ -8,15 +9,15 @@ Use these functions to convert between 'Maybe', 'Either', 'MaybeT', and
 hush :: forall a b. Either a b -> Maybe b
 ```
 
-Suppress the 'Left' value of an 'Either'
+Suppress the `Left` value of an `Either`
 
 #### `hushT`
 
 ``` purescript
-hushT :: forall a b m. (Monad m) => ExceptT a m b -> MaybeT m b
+hushT :: forall a b m. Monad m => ExceptT a m b -> MaybeT m b
 ```
 
-Suppress the 'Left' value of an 'ExceptT'
+Suppress the `Left` value of an `ExceptT`
 
 #### `note`
 
@@ -24,31 +25,31 @@ Suppress the 'Left' value of an 'ExceptT'
 note :: forall a b. a -> Maybe b -> Either a b
 ```
 
-Tag the 'Nothing' value of a 'Maybe'
+Tag the `Nothing` value of a `Maybe`
 
 #### `noteT`
 
 ``` purescript
-noteT :: forall a b m. (Monad m) => a -> MaybeT m b -> ExceptT a m b
+noteT :: forall a b m. Monad m => a -> MaybeT m b -> ExceptT a m b
 ```
 
-Tag the 'Nothing' value of a 'MaybeT'
+Tag the `Nothing` value of a `MaybeT`
 
 #### `hoistMaybe`
 
 ``` purescript
-hoistMaybe :: forall b m. (Monad m) => Maybe b -> MaybeT m b
+hoistMaybe :: forall b m. Monad m => Maybe b -> MaybeT m b
 ```
 
-Lift a 'Maybe' to the 'MaybeT' monad
+Lift a `Maybe` to the `MaybeT` monad
 
 #### `exceptNoteM`
 
 ``` purescript
-exceptNoteM :: forall a e m. (Applicative m) => Maybe a -> e -> ExceptT e m a
+exceptNoteM :: forall a e m. Applicative m => Maybe a -> e -> ExceptT e m a
 ```
 
-Convert a 'Maybe' value into the 'ExceptT' monad
+Convert a `Maybe` value into the `ExceptT` monad
 
 #### `(??)`
 
@@ -61,10 +62,10 @@ _left-associative / precedence 9_
 #### `exceptNoteA`
 
 ``` purescript
-exceptNoteA :: forall a e m. (Apply m) => m (Maybe a) -> e -> ExceptT e m a
+exceptNoteA :: forall a e m. Apply m => m (Maybe a) -> e -> ExceptT e m a
 ```
 
-Convert an applicative 'Maybe' value into the 'ExceptT' monad
+Convert an applicative `Maybe` value into the `ExceptT` monad
 
 #### `(!?)`
 
@@ -80,7 +81,7 @@ _left-associative / precedence 9_
 fromMaybe' :: forall a. Maybe a -> a -> a
 ```
 
-An infix form of 'fromMaybe' with arguments flipped.
+An infix form of `fromMaybe` with arguments flipped.
 
 #### `(?:)`
 
@@ -89,4 +90,5 @@ infixl 9 fromMaybe' as ?:
 ```
 
 _left-associative / precedence 9_
+
 
