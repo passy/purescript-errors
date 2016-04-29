@@ -1,21 +1,18 @@
 module Test.Data.EitherR where
 
-import Test.Unit.Assert as Assert
 import Control.Alt ((<|>))
-import Control.Monad.Aff (Aff)
-import Control.Monad.Aff.AVar (AVAR)
 import Data.Either (Either(Left, Right))
 import Data.EitherR (EitherR, succeed, runEitherR)
-import Prelude (class Eq, return, bind, Unit, ($), (==))
-import Test.Unit (test, TIMER)
-import Test.Unit.Console (TESTOUTPUT)
+import Prelude (class Eq, (==), ($), return, bind)
+import Test.Unit (test, TestSuite)
+import Test.Unit.Assert as Assert
 
 data TestError = TestError Int
 instance eqTestError :: Eq TestError where
   eq (TestError i) (TestError j) = i == j
 
 
-suite :: forall eff. Aff ( timer :: TIMER , avar :: AVAR , testOutput :: TESTOUTPUT | eff ) Unit
+suite :: forall a. TestSuite a
 suite = do
   test "EitherR monad" $ do
     let succeedResult = runEitherR $ do
