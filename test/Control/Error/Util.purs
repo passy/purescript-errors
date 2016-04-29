@@ -2,13 +2,12 @@ module Test.Control.Error.Util where
 
 import Control.Error.Util ((?:), (??), hoistMaybe, noteT, note, hushT, hush)
 import Control.Monad.Except (runExcept, except)
-import Control.Monad.Free (Free)
 import Control.Monad.Maybe.Trans (MaybeT(MaybeT), runMaybeT)
 import Data.Either (Either(..))
 import Data.Identity (Identity(Identity), runIdentity)
 import Data.Maybe (Maybe(..), fromMaybe, isNothing)
-import Prelude (Unit, (==), ($), bind, (<<<), (<$>))
-import Test.Unit (TestF, test)
+import Prelude ((==), ($), bind, (<<<), (<$>))
+import Test.Unit (TestSuite, test)
 import Test.Unit.Assert as Assert
 
 type MaybeId a = MaybeT Identity a
@@ -19,7 +18,7 @@ maybeId = MaybeT <<< Identity
 testMaybe :: forall a. (a -> Boolean) -> Maybe a -> Boolean
 testMaybe f a = fromMaybe false (f <$> a)
 
-suite :: forall a. Free (TestF a) Unit
+suite :: forall a. TestSuite a
 suite = do
   test "hush" $ do
     Assert.assert "Right is Just" $ testMaybe (_ == 5) (hush $ Right 5)
