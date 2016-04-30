@@ -23,7 +23,7 @@
     "type": "git",
     "url": "git://github.com/passy/purescript-errors.git"
   },
-  "license": "Apache-2",
+  "license": "Apache-2.0",
   "dependencies": {
     "purescript-either": "~0.2.2",
     "purescript-maybe": "~0.3.4",
