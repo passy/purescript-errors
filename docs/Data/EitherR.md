@@ -5,7 +5,7 @@ functions reside here because `throwEither` and `catchEither` correspond
 to `return` and `bind` for flipped `Either` monad: `EitherR`.
 
 `catchEither` differs from `MonadError` (`cacheError`) - `catchEither` is
-more general as it allows you to cahnge the left value's type.
+more general as it allows you to change the left value's type.
 
 `throwEither` is just `throwError` but exists here for consistency.
 
