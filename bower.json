@@ -1,6 +1,5 @@
 {
   "name": "purescript-errors",
-  "version": "0.2.0",
   "moduleType": [
     "node"
   ],
