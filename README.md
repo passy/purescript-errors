@@ -7,7 +7,9 @@
 > A partial port of Gabriel Gonzalez' [errors
 > library](https://github.com/Gabriel439/Haskell-Errors-Library) for Haskell.
 
-- [Module documentation](docs/Control/Error/Util.md)
+- Module documentation:
+    - [Control.Error.Util](docs/Control/Error/Util.md)
+    - [Data.EitherR](docs/Data/EitherR.md)
 - [Pursuit](http://pursuit.purescript.org/packages/purescript-errors)
 
 ## About that "partial"
