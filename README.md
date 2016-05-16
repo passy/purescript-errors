@@ -17,3 +17,7 @@
 `Control.Error.Safe` has not been ported since `purescript-lists` and
 `purescript-arrays` provide safe alternatives by default. `Control.Error.Script`
 relies on platform-specific features not available in PureScript.
+
+## License
+
+[Apache-2](LICENSE)
