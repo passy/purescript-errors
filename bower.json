@@ -24,9 +24,9 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "purescript-either": "~0.2.2",
-    "purescript-maybe": "~0.3.4",
-    "purescript-transformers": "~0.8.1"
+    "purescript-either": "~1.0.0",
+    "purescript-maybe": "~1.0.0",
+    "purescript-transformers": "~1.0.0"
   },
   "devDependencies": {
     "purescript-test-unit": "^6.0.0"
