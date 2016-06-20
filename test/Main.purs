@@ -7,6 +7,8 @@ import Control.Monad.Eff (Eff)
 import Control.Monad.Eff.Console (CONSOLE)
 import Control.Monad.Maybe.Trans (MaybeT)
 import Data.Identity (Identity)
+import Test.Control.Error.Util (suite) as UtilTest
+import Test.Data.EitherR (suite) as EitherRTest
 import Test.Unit (TIMER, suite)
 import Test.Unit.Console (TESTOUTPUT)
 import Test.Unit.Main (runTest)
@@ -19,5 +21,5 @@ main :: forall eff. Eff ( timer :: TIMER
                         , console :: CONSOLE
                         , testOutput :: TESTOUTPUT | eff ) Unit
 main = runTest $ do
-  suite "Control.Error.Util" Test.Control.Error.Util.suite
-  suite "Data.EitherR" Test.Data.EitherR.suite
+  suite "Control.Error.Util" UtilTest.suite
+  suite "Data.EitherR" EitherRTest.suite
