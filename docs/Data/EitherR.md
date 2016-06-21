@@ -52,6 +52,7 @@ Monad (EitherR r)
 (Monoid r) => Alt (EitherR r)
 (Monoid r) => Plus (EitherR r)
 (Monoid r) => Alternative (EitherR r)
+(Monoid r) => MonadZero (EitherR r)
 (Monoid r) => MonadPlus (EitherR r)
 ```
 
@@ -128,6 +129,7 @@ newtype ExceptRT r m e
 (Monoid r, Monad m) => Alt (ExceptRT r m)
 (Monoid r, Monad m) => Plus (ExceptRT r m)
 (Monoid r, Monad m) => Alternative (ExceptRT r m)
+(Monoid r, Monad m) => MonadZero (ExceptRT r m)
 (Monoid r, Monad m) => MonadPlus (ExceptRT r m)
 MonadTrans (ExceptRT r)
 (MonadEff eff m) => MonadEff eff (ExceptRT r m)

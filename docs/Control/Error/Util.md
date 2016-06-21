@@ -57,8 +57,6 @@ Convert a `Maybe` value into the `ExceptT` monad
 infixl 9 exceptNoteM as ??
 ```
 
-_left-associative / precedence 9_
-
 #### `exceptNoteA`
 
 ``` purescript
@@ -73,8 +71,6 @@ Convert an applicative `Maybe` value into the `ExceptT` monad
 infixl 9 exceptNoteA as !?
 ```
 
-_left-associative / precedence 9_
-
 #### `fromMaybe'`
 
 ``` purescript
@@ -88,7 +84,5 @@ An infix form of `fromMaybe` with arguments flipped.
 ``` purescript
 infixl 9 fromMaybe' as ?:
 ```
-
-_left-associative / precedence 9_
 
 
