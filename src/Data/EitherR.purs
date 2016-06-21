@@ -48,10 +48,11 @@ import Control.Monad.Error.Class (throwError)
 import Control.Monad.Except.Trans (ExceptT(ExceptT), runExceptT)
 import Control.Monad.Trans (lift, class MonadTrans)
 import Control.MonadPlus (class MonadPlus)
+import Control.MonadZero (class MonadZero)
 import Control.Plus (class Plus)
 import Data.Either (Either(Right, Left))
 import Data.Monoid (mempty, class Monoid)
-import Prelude (class Bind, bind, flip, return, class Monad, class Applicative, class Apply, class Functor, ap, liftM1, (<>), (<<<), (>>=), (<$>), ($))
+import Prelude (class Bind, bind, flip, pure, class Monad, class Applicative, class Apply, class Functor, ap, liftM1, (<>), (<<<), (>>=), (<$>), ($))
 
 -- | If `Either e r` is the error monad, then `EitherR r e` is the
 -- | corresponding success monad, where:
@@ -96,15 +97,17 @@ instance plusEitherR :: (Monoid r) => Plus (EitherR r) where
 
 instance alternativeEitherR :: (Monoid r) => Alternative (EitherR r)
 
-instance monadPlusEihterR :: (Monoid r) => MonadPlus (EitherR r)
+instance monadZeroEitherR :: (Monoid r) => MonadZero (EitherR r)
+
+instance monadPlusEitherR :: (Monoid r) => MonadPlus (EitherR r)
 
 -- | Complete error handling, returning a result
 succeed :: forall e r. r -> EitherR r e
-succeed r = EitherR (return r)
+succeed r = EitherR (pure r)
 
 -- | `throwEither` in the error monad corresponds to `return` in the success monad
 throwEither :: forall e r. e -> Either e r
-throwEither e = runEitherR (return e)
+throwEither e = runEitherR (pure e)
 
 -- | `catchEither` in the error monad corresponds to `(>>=)` in the success monad
 catchEither :: forall e e' r. Either e r -> (e -> Either e' r) -> Either e' r
@@ -144,7 +147,7 @@ instance bindExceptRT :: (Monad m) => Bind (ExceptRT r m) where
     e <- runExceptT <<< runExceptRT $ m
     case e of
       Left l -> runExceptT <<< runExceptRT <<< f $ l
-      Right r -> return (Right r)
+      Right r -> pure (Right r)
 
 instance monadExceptRT :: (Monad m) => Monad (ExceptRT r m)
 
@@ -152,17 +155,19 @@ instance altExceptRT :: (Monoid r, Monad m) => Alt (ExceptRT r m) where
   alt e1 e2 = ExceptRT <<< ExceptT $ do
     e1' <- runExceptT <<< runExceptRT $ e1
     case e1' of
-      Left l -> return e1'
+      Left l -> pure e1'
       Right r1 -> do
         e2' <- runExceptT <<< runExceptRT $ e2
         case e2' of
-          Left l' -> return e2'
-          Right r2 -> return (Right (r1 <> r2))
+          Left l' -> pure e2'
+          Right r2 -> pure (Right (r1 <> r2))
 
 instance plusExceptRT :: (Monoid r, Monad m) => Plus (ExceptRT r m) where
-  empty = ExceptRT $ return mempty
+  empty = ExceptRT $ pure mempty
 
 instance alternativeExceptRT :: (Monoid r, Monad m) => Alternative (ExceptRT r m)
+
+instance monadZeroExceptRT :: (Monoid r, Monad m) => MonadZero (ExceptRT r m)
 
 instance monadPlusExceptRT :: (Monoid r, Monad m) => MonadPlus (ExceptRT r m)
 
@@ -174,7 +179,7 @@ instance monadEffExceptRT :: (MonadEff eff m) => MonadEff eff (ExceptRT r m) whe
 
 -- | Complete error handling, returning a result
 succeedT :: forall e m r. (Monad m) => r -> ExceptRT r m e
-succeedT r = ExceptRT (return r)
+succeedT r = ExceptRT (pure r)
 
 -- | Modify `ExceptT` error value
 -- | The same as `Control.Monad.Except.Trans.withExceptT`, but left

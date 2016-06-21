@@ -16,7 +16,7 @@ module Control.Error.Util
 where
 
 import Prelude ( class Apply, class Applicative, class Monad
-               , (<$>), pure, ($), return, (<<<), liftM1, const
+               , (<$>), pure, ($), (<<<), liftM1, const
                , flip
                )
 import Data.Either (Either(Left, Right), either)
@@ -42,7 +42,7 @@ noteT a = ExceptT <<< liftM1 (note a) <<< runMaybeT
 
 -- | Lift a `Maybe` to the `MaybeT` monad
 hoistMaybe :: forall b m. (Monad m) => Maybe b -> MaybeT m b
-hoistMaybe = MaybeT <<< return
+hoistMaybe = MaybeT <<< pure
 
 -- | Convert a `Maybe` value into the `ExceptT` monad
 exceptNoteM :: forall a e m. (Applicative m) => Maybe a -> e -> ExceptT e m a
