@@ -2,6 +2,7 @@
 
 [![Latest release](http://img.shields.io/bower/v/purescript-errors.svg)](https://github.com/passy/purescript-errors/releases)
 [![Build Status](https://travis-ci.org/passy/purescript-errors.svg?branch=master)](https://travis-ci.org/passy/purescript-errors)
+[![Build Status](https://codeship.com/projects/159258/status?branch=master)](https://codeship.com/projects/159258)
 [![Dependency Status](https://www.versioneye.com/user/projects/55e9948a211c6b001f000de3/badge.svg?style=flat)](https://www.versioneye.com/user/projects/55e9948a211c6b001f000de3)
 
 > A partial port of Gabriel Gonzalez' [errors
