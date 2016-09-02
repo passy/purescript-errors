@@ -9,15 +9,14 @@ import Control.Monad.Maybe.Trans (MaybeT)
 import Data.Identity (Identity)
 import Test.Control.Error.Util (suite) as UtilTest
 import Test.Data.EitherR (suite) as EitherRTest
-import Test.Unit (TIMER, suite)
+import Test.Unit (suite)
 import Test.Unit.Console (TESTOUTPUT)
 import Test.Unit.Main (runTest)
 
 type MaybeId a = MaybeT Identity a
 
 
-main :: forall eff. Eff ( timer :: TIMER
-                        , avar :: AVAR
+main :: forall eff. Eff ( avar :: AVAR
                         , console :: CONSOLE
                         , testOutput :: TESTOUTPUT | eff ) Unit
 main = runTest $ do
