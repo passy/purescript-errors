@@ -4,8 +4,9 @@ import Control.Error.Util ((?:), (??), hoistMaybe, noteT, note, hushT, hush)
 import Control.Monad.Except (runExcept, except)
 import Control.Monad.Maybe.Trans (MaybeT(MaybeT), runMaybeT)
 import Data.Either (Either(..))
-import Data.Identity (Identity(Identity), runIdentity)
+import Data.Identity (Identity(Identity))
 import Data.Maybe (Maybe(..), fromMaybe, isNothing)
+import Data.Newtype (unwrap)
 import Prelude ((==), ($), bind, (<<<), (<$>))
 import Test.Unit (TestSuite, test)
 import Test.Unit.Assert as Assert
@@ -17,6 +18,9 @@ maybeId = MaybeT <<< Identity
 
 testMaybe :: forall a. (a -> Boolean) -> Maybe a -> Boolean
 testMaybe f a = fromMaybe false (f <$> a)
+
+runIdentity :: forall a. Identity a -> a
+runIdentity = unwrap
 
 suite :: forall a. TestSuite a
 suite = do
