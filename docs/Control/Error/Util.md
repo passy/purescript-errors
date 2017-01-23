@@ -71,6 +71,14 @@ Convert an applicative `Maybe` value into the `ExceptT` monad
 infixl 9 exceptNoteA as !?
 ```
 
+#### `bool`
+
+``` purescript
+bool :: forall a. a -> a -> Boolean -> a
+```
+
+Case analysis for the `Boolean` type
+
 #### `fromMaybe'`
 
 ``` purescript

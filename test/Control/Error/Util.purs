@@ -1,6 +1,8 @@
 module Test.Control.Error.Util where
 
-import Control.Error.Util ((?:), (??), hoistMaybe, noteT, note, hushT, hush)
+import Control.Error.Util ( (?:), (??), hoistMaybe, noteT, note, hushT, hush
+                          , bool
+                          )
 import Control.Monad.Except (runExcept, except)
 import Control.Monad.Maybe.Trans (MaybeT(MaybeT), runMaybeT)
 import Data.Either (Either(..))
@@ -92,6 +94,10 @@ suite = do
       case unwrap of
         Right a -> a == "something"
         _       -> false
+
+  test "bool" $ do
+    Assert.assert "choose first argument if false" $ (bool 5 42 false) == 5
+    Assert.assert "choose second argument if true" $ (bool 5 42 true) == 42
 
   test "(?:)" $ do
     Assert.assert "from Nothing" $ (Nothing ?: "nothing") == "nothing"
