@@ -12,6 +12,7 @@ module Control.Error.Util
   , fromMaybe'
   , exceptNoteA
   , exceptNoteM
+  , bool
   )
 where
 
@@ -55,6 +56,10 @@ exceptNoteA :: forall a e m. (Apply m) => m (Maybe a) -> e -> ExceptT e m a
 exceptNoteA a e = ExceptT (note e <$> a)
 
 infixl 9 exceptNoteA as !?
+
+-- | Case analysis for the `Boolean` type
+bool :: forall a. a -> a -> Boolean -> a
+bool a b c = if c then b else a
 
 -- | An infix form of `fromMaybe` with arguments flipped.
 fromMaybe' :: forall a. Maybe a -> a -> a
