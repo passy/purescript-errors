@@ -24,7 +24,7 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "purescript-either": "^2.0.0",
+    "purescript-either": "^2.1.0",
     "purescript-maybe": "^2.0.1",
     "purescript-transformers": "^2.0.1",
     "purescript-control": "^2.0.0",
