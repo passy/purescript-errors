@@ -1,0 +1,18 @@
+{
+    "name": "purescript-errors",
+    "set": "psc-0.10.7",
+    "source": "https://github.com/purescript/package-sets.git",
+    "depends": [
+        "prelude",
+        "either",
+        "maybe",
+        "transformers",
+        "control",
+        "eff",
+        "monoid",
+        "test-unit",
+        "aff",
+        "identity",
+        "newtype"
+    ]
+}
