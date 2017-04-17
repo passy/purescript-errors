@@ -9,7 +9,7 @@ import Data.Either (Either(..))
 import Data.Identity (Identity(Identity))
 import Data.Maybe (Maybe(..), fromMaybe, isNothing)
 import Data.Newtype (unwrap)
-import Prelude ((==), ($), bind, (<<<), (<$>))
+import Prelude ((==), ($), discard, (<<<), (<$>))
 import Test.Unit (TestSuite, test)
 import Test.Unit.Assert as Assert
 
