@@ -151,7 +151,7 @@ instance bindExceptRT :: Monad m => Bind (ExceptRT r m) where
 
 instance monadExceptRT :: Monad m => Monad (ExceptRT r m)
 
-instance altExceptRT :: (Monoid r, Monad m) => Alt (ExceptRT r m) where
+instance altExceptRT :: Monoid r => Monad m => Alt (ExceptRT r m) where
   alt e1 e2 = ExceptRT <<< ExceptT $ do
     e1' <- runExceptT <<< runExceptRT $ e1
     case e1' of
@@ -162,14 +162,14 @@ instance altExceptRT :: (Monoid r, Monad m) => Alt (ExceptRT r m) where
           Left l' -> pure e2'
           Right r2 -> pure (Right (r1 <> r2))
 
-instance plusExceptRT :: (Monoid r, Monad m) => Plus (ExceptRT r m) where
+instance plusExceptRT :: Monoid r => Monad m => Plus (ExceptRT r m) where
   empty = ExceptRT $ pure mempty
 
-instance alternativeExceptRT :: (Monoid r, Monad m) => Alternative (ExceptRT r m)
+instance alternativeExceptRT :: Monoid r => Monad m => Alternative (ExceptRT r m)
 
-instance monadZeroExceptRT :: (Monoid r, Monad m) => MonadZero (ExceptRT r m)
+instance monadZeroExceptRT :: Monoid r => Monad m => MonadZero (ExceptRT r m)
 
-instance monadPlusExceptRT :: (Monoid r, Monad m) => MonadPlus (ExceptRT r m)
+instance monadPlusExceptRT :: Monoid r => Monad m => MonadPlus (ExceptRT r m)
 
 instance monadTrans :: MonadTrans (ExceptRT r) where
   lift = ExceptRT <<< ExceptT <<< (Left <$> _)
