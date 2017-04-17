@@ -30,7 +30,7 @@ hush :: forall a b. Either a b -> Maybe b
 hush = either (const Nothing) Just
 
 -- | Suppress the `Left` value of an `ExceptT`
-hushT :: forall a b m. (Monad m) => ExceptT a m b -> MaybeT m b
+hushT :: forall a b m. Monad m => ExceptT a m b -> MaybeT m b
 hushT = MaybeT <<< liftM1 hush <<< runExceptT
 
 -- | Tag the `Nothing` value of a `Maybe`
@@ -38,21 +38,21 @@ note :: forall a b. a -> Maybe b -> Either a b
 note a = maybe (Left a) Right
 
 -- | Tag the `Nothing` value of a `MaybeT`
-noteT :: forall a b m. (Monad m) => a -> MaybeT m b -> ExceptT a m b
+noteT :: forall a b m. Monad m => a -> MaybeT m b -> ExceptT a m b
 noteT a = ExceptT <<< liftM1 (note a) <<< runMaybeT
 
 -- | Lift a `Maybe` to the `MaybeT` monad
-hoistMaybe :: forall b m. (Monad m) => Maybe b -> MaybeT m b
+hoistMaybe :: forall b m. Monad m => Maybe b -> MaybeT m b
 hoistMaybe = MaybeT <<< pure
 
 -- | Convert a `Maybe` value into the `ExceptT` monad
-exceptNoteM :: forall a e m. (Applicative m) => Maybe a -> e -> ExceptT e m a
+exceptNoteM :: forall a e m. Applicative m => Maybe a -> e -> ExceptT e m a
 exceptNoteM a e = ExceptT (pure $ note e a)
 
 infixl 9 exceptNoteM as ??
 
 -- | Convert an applicative `Maybe` value into the `ExceptT` monad
-exceptNoteA :: forall a e m. (Apply m) => m (Maybe a) -> e -> ExceptT e m a
+exceptNoteA :: forall a e m. Apply m => m (Maybe a) -> e -> ExceptT e m a
 exceptNoteA a e = ExceptT (note e <$> a)
 
 infixl 9 exceptNoteA as !?
