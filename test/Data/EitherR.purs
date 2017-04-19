@@ -3,7 +3,7 @@ module Test.Data.EitherR where
 import Control.Alt ((<|>))
 import Data.Either (Either(Left, Right))
 import Data.EitherR (EitherR, succeed, runEitherR)
-import Prelude (class Eq, (==), ($), pure, bind)
+import Prelude (class Eq, (==), ($), pure, discard, bind)
 import Test.Unit (test, TestSuite)
 import Test.Unit.Assert as Assert
 
@@ -17,7 +17,7 @@ suite = do
   test "EitherR monad" $ do
     let succeedResult = runEitherR $ do
                           x <- pure 1
-                          succeed 2
+                          _ <- succeed 2
                           pure x
     Assert.assert "`succeed` breaks execution chain with `Right` value" $
       succeedResult == Right 2

@@ -86,20 +86,20 @@ instance bindEitherR :: Bind (EitherR r) where
 
 instance monadEitherR :: Monad (EitherR r)
 
-instance altEitherR :: (Monoid r) => Alt (EitherR r) where
+instance altEitherR :: Monoid r => Alt (EitherR r) where
   alt e1@(EitherR (Left _))  _ = e1
   alt _  e2@(EitherR (Left _)) = e2
   alt (EitherR (Right r1)) (EitherR (Right r2)) =
     EitherR (Right (r1 <> r2))
 
-instance plusEitherR :: (Monoid r) => Plus (EitherR r) where
+instance plusEitherR :: Monoid r => Plus (EitherR r) where
   empty = EitherR (Right mempty)
 
-instance alternativeEitherR :: (Monoid r) => Alternative (EitherR r)
+instance alternativeEitherR :: Monoid r => Alternative (EitherR r)
 
-instance monadZeroEitherR :: (Monoid r) => MonadZero (EitherR r)
+instance monadZeroEitherR :: Monoid r => MonadZero (EitherR r)
 
-instance monadPlusEitherR :: (Monoid r) => MonadPlus (EitherR r)
+instance monadPlusEitherR :: Monoid r => MonadPlus (EitherR r)
 
 -- | Complete error handling, returning a result
 succeed :: forall e r. r -> EitherR r e
@@ -133,23 +133,23 @@ newtype ExceptRT r m e = ExceptRT (ExceptT e m r)
 runExceptRT :: forall e m r. ExceptRT r m e -> ExceptT e m r
 runExceptRT (ExceptRT e) = e
 
-instance functorExceptRT :: (Monad m) => Functor (ExceptRT r m) where
+instance functorExceptRT :: Monad m => Functor (ExceptRT r m) where
   map = liftM1
 
-instance applyExceptRT :: (Monad m) => Apply (ExceptRT r m) where
+instance applyExceptRT :: Monad m => Apply (ExceptRT r m) where
   apply = ap
 
-instance applicativeExceptRT :: (Monad m) => Applicative (ExceptRT r m) where
+instance applicativeExceptRT :: Monad m => Applicative (ExceptRT r m) where
   pure e = ExceptRT (throwError e)
 
-instance bindExceptRT :: (Monad m) => Bind (ExceptRT r m) where
+instance bindExceptRT :: Monad m => Bind (ExceptRT r m) where
   bind m f = ExceptRT <<< ExceptT $ do
     e <- runExceptT <<< runExceptRT $ m
     case e of
       Left l -> runExceptT <<< runExceptRT <<< f $ l
       Right r -> pure (Right r)
 
-instance monadExceptRT :: (Monad m) => Monad (ExceptRT r m)
+instance monadExceptRT :: Monad m => Monad (ExceptRT r m)
 
 instance altExceptRT :: (Monoid r, Monad m) => Alt (ExceptRT r m) where
   alt e1 e2 = ExceptRT <<< ExceptT $ do
@@ -174,18 +174,18 @@ instance monadPlusExceptRT :: (Monoid r, Monad m) => MonadPlus (ExceptRT r m)
 instance monadTrans :: MonadTrans (ExceptRT r) where
   lift = ExceptRT <<< ExceptT <<< (Left <$> _)
 
-instance monadEffExceptRT :: (MonadEff eff m) => MonadEff eff (ExceptRT r m) where
+instance monadEffExceptRT :: MonadEff eff m => MonadEff eff (ExceptRT r m) where
   liftEff = lift <<< liftEff
 
 -- | Complete error handling, returning a result
-succeedT :: forall e m r. (Monad m) => r -> ExceptRT r m e
+succeedT :: forall e m r. Monad m => r -> ExceptRT r m e
 succeedT r = ExceptRT (pure r)
 
 -- | Modify `ExceptT` error value
 -- | The same as `Control.Monad.Except.Trans.withExceptT`, but left
 -- | here for module API consistency.
-fmapLT :: forall e e' m r. (Monad m) => (e -> e') -> ExceptT e m r -> ExceptT e' m r
+fmapLT :: forall e e' m r. Monad m => (e -> e') -> ExceptT e m r -> ExceptT e' m r
 fmapLT f = runExceptRT <<< liftM1 f <<< ExceptRT
 
-flipET :: forall a m r. (Monad m) => ExceptT a m r -> ExceptT r m a
+flipET :: forall a m r. Monad m => ExceptT a m r -> ExceptT r m a
 flipET = ExceptT <<< liftM1 flipEither <<< runExceptT
