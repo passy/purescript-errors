@@ -1,5 +1,7 @@
 # purescript-errors
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/passy/purescript-errors.svg)](https://greenkeeper.io/)
+
 [![Latest release](http://img.shields.io/bower/v/purescript-errors.svg)](https://github.com/passy/purescript-errors/releases)
 [ ![Codeship Status for passy/purescript-errors](https://codeship.com/projects/faffa470-1a22-0134-7c85-56774cd00e66/status?branch=master)](https://codeship.com/projects/159258)
 [![Dependency Status](https://www.versioneye.com/user/projects/55e9948a211c6b001f000de3/badge.svg?style=flat)](https://www.versioneye.com/user/projects/55e9948a211c6b001f000de3)
