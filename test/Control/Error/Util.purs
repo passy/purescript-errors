@@ -24,7 +24,7 @@ testMaybe f a = fromMaybe false (f <$> a)
 runIdentity :: forall a. Identity a -> a
 runIdentity = unwrap
 
-suite :: forall a. TestSuite a
+suite :: TestSuite
 suite = do
   test "hush" $ do
     Assert.assert "Right is Just" $ testMaybe (_ == 5) (hush $ Right 5)

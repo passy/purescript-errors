@@ -12,7 +12,7 @@ instance eqTestError :: Eq TestError where
   eq (TestError i) (TestError j) = i == j
 
 
-suite :: forall a. TestSuite a
+suite :: TestSuite
 suite = do
   test "EitherR monad" $ do
     let succeedResult = runEitherR $ do
