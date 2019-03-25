@@ -1,6 +1,6 @@
 ## Module Data.EitherR
 
-This module provides `throwEither` and `cachEither` for Either. These
+This module provides `throwEither` and `catchEither` for Either. These
 functions reside here because `throwEither` and `catchEither` correspond
 to `return` and `bind` for flipped `Either` monad: `EitherR`.
 
