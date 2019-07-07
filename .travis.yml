@@ -5,9 +5,10 @@ node_js:
 - '11'
 install:
   - yarn global add bower
-  - bower install
+  - bower install --production
   - yarn
 script:
+  - yarn build
   - yarn test
 after_success:
 - >-
