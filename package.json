@@ -2,8 +2,8 @@
   "private": true,
   "scripts": {
     "clean": "rimraf output && rimraf .pulp-cache",
-    "test": "env export PATH=\"./node_modules/.bin:$PATH\" pulp build -I test -- --censor-lib --strict",
-    "build": "env export PATH=\"./node_modules/.bin:$PATH\" pulp build -- --censor-lib --strict"
+    "test": "env PATH=\"./node_modules/.bin:$PATH\" pulp build -I test -- --censor-lib --strict",
+    "build": "env PATH=\"./node_modules/.bin:$PATH\" pulp build -- --censor-lib --strict"
   },
   "license": "Apache-2",
   "devDependencies": {
