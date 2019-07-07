@@ -4,7 +4,8 @@ node_js:
 - '10'
 - '11'
 install:
-  - npm install -g bower
+  # Remove purescript here once local installation is fixed.
+  - npm install -g bower purescript
   - bower install --production
   - npm install
 script:
