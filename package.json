@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "test": "npm run pulp test && npm run rimraf docs && npm run pulp docs"
+    "test": "yarn run pulp test && yarn run rimraf docs && yarn run pulp docs"
   },
   "license": "Apache-2",
   "devDependencies": {

@@ -4,11 +4,11 @@ node_js:
 - '10'
 - '11'
 install:
-  - npm install -g bower
+  - yarn add --global bower
   - bower install
-  - npm install
+  - yarn
 script:
-  - npm test
+  - yarn test
 after_success:
 - >-
   test $TRAVIS_TAG &&
