@@ -4,11 +4,13 @@ node_js:
 - '10'
 - '11'
 install:
-  - npm install -g bower
+  # Remove purescript here once local installation is fixed.
+  - npm install -g bower purescript
   - bower install
   - npm install
 script:
-  - npm test
+  - npm run -s build
+  - npm run -s test
 after_success:
 - >-
   test $TRAVIS_TAG &&

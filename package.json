@@ -1,12 +1,15 @@
 {
   "private": true,
   "scripts": {
-    "test": "pulp test && rimraf docs && pulp docs"
+    "clean": "rimraf output && rimraf .pulp-cache",
+    "test": "pulp build -I test -- --censor-lib --strict",
+    "build": "pulp build -- --censor-lib --strict"
   },
   "license": "Apache-2",
   "devDependencies": {
-    "pulp": "^12.0.0",
-    "rimraf": "^2.5.4",
-    "purescript": "0.12.5"
+    "pulp": "^13.0.0",
+    "purescript": "0.13.0",
+    "purescript-psa": "^0.7.3",
+    "rimraf": "^2.6.3"
   }
 }
