@@ -57,7 +57,7 @@ exceptNoteA a e = ExceptT (note e <$> a)
 
 infixl 9 exceptNoteA as !?
 
--- | Case analysis for the `Boolean` type
+-- | Case analysis for the `Boolean` type. If  the `Boolean` is false, the first case is taken, otherwise the second case is taken.
 bool :: forall a. a -> a -> Boolean -> a
 bool a b c = if c then b else a
 
