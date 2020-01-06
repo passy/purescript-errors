@@ -1,9 +1,7 @@
 -- | Use these functions to convert between `Maybe`, `Either`, `MaybeT`, and
 -- | `ExceptT`.
 module Control.Error.Util
-  ( hush
-  , hushT
-  , note
+  ( hushT
   , noteT
   , hoistMaybe
   , (??)

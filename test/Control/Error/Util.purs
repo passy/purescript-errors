@@ -1,7 +1,6 @@
 module Test.Control.Error.Util where
 
-import Control.Error.Util ( (?:), (??), hoistMaybe, noteT, note, hushT, hush
-                          , bool
+import Control.Error.Util ( (?:), (??), hoistMaybe, noteT, hushT, bool
                           )
 import Control.Monad.Except (runExcept, except)
 import Control.Monad.Maybe.Trans (MaybeT(MaybeT), runMaybeT)
@@ -26,10 +25,6 @@ runIdentity = unwrap
 
 suite :: TestSuite
 suite = do
-  test "hush" $ do
-    Assert.assert "Right is Just" $ testMaybe (_ == 5) (hush $ Right 5)
-    Assert.assert "Left is Nothing" $ isNothing (hush $ Left 5)
-
   test "hushT" $ do
     let exR = except $ Right "right"
     let exL = except $ Left "left"
@@ -41,19 +36,6 @@ suite = do
     Assert.assert "Except Left is Nothing" $ do
       let res = runIdentity <<< runMaybeT <<< hushT $ exL
       isNothing res
-
-  test "note" $ do
-    Assert.assert "Nothing is Left a" $ do
-      let res = note "nothing" Nothing
-      case res of
-        Left a -> a == "nothing"
-        _      -> false
-
-    Assert.assert "Just is Right a" $ do
-      let res = note "nothing" $ Just "something"
-      case res of
-        Right a -> a == "something"
-        _       -> false
 
   test "noteT" $ do
     Assert.assert "Nothing is Left a" $ do
