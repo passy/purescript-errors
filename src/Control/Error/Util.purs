@@ -3,6 +3,7 @@
 module Control.Error.Util
   ( hushT
   , noteT
+  , note
   , hoistMaybe
   , (??)
   , (!?)
