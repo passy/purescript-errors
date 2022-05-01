@@ -2,6 +2,7 @@
 -- | `ExceptT`.
 module Control.Error.Util
   ( hushT
+  , hush
   , noteT
   , note
   , hoistMaybe
