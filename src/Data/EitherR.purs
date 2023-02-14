@@ -47,7 +47,6 @@ import Control.Monad.Error.Class (throwError)
 import Control.Monad.Except.Trans (ExceptT(ExceptT), runExceptT)
 import Control.Monad.Trans.Class (lift, class MonadTrans)
 import Control.MonadPlus (class MonadPlus)
-import Control.MonadZero (class MonadZero)
 import Control.Plus (class Plus)
 import Data.Either (Either(Right, Left))
 import Data.Monoid (mempty, class Monoid)
@@ -96,8 +95,6 @@ instance plusEitherR :: Monoid r => Plus (EitherR r) where
   empty = EitherR (Right mempty)
 
 instance alternativeEitherR :: Monoid r => Alternative (EitherR r)
-
-instance monadZeroEitherR :: Monoid r => MonadZero (EitherR r)
 
 instance monadPlusEitherR :: Monoid r => MonadPlus (EitherR r)
 
@@ -155,19 +152,17 @@ instance altExceptRT :: (Monoid r, Monad m) => Alt (ExceptRT r m) where
   alt e1 e2 = ExceptRT <<< ExceptT $ do
     e1' <- runExceptT <<< runExceptRT $ e1
     case e1' of
-      Left l -> pure e1'
+      Left _ -> pure e1'
       Right r1 -> do
         e2' <- runExceptT <<< runExceptRT $ e2
         case e2' of
-          Left l' -> pure e2'
+          Left _ -> pure e2'
           Right r2 -> pure (Right (r1 <> r2))
 
 instance plusExceptRT :: (Monoid r, Monad m) => Plus (ExceptRT r m) where
   empty = ExceptRT $ pure mempty
 
 instance alternativeExceptRT :: (Monoid r, Monad m) => Alternative (ExceptRT r m)
-
-instance monadZeroExceptRT :: (Monoid r, Monad m) => MonadZero (ExceptRT r m)
 
 instance monadPlusExceptRT :: (Monoid r, Monad m) => MonadPlus (ExceptRT r m)
 

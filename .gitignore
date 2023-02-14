@@ -5,3 +5,6 @@
 /src/.webpack.js
 .pulp-cache/
 .psc-package/
+.spago/
+.purs-repl
+.psc-ide-port

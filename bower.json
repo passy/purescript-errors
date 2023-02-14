@@ -24,20 +24,16 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "purescript-either": "^4.1.1",
-    "purescript-maybe": "^4.0.1",
-    "purescript-transformers": "^4.2.0",
-    "purescript-control": "^4.1.0",
-    "purescript-effect": "^2.0.1"
+    "purescript-either": "^6.0.0",
+    "purescript-maybe": "^6.0.0",
+    "purescript-transformers": "^6.0.0",
+    "purescript-control": "^6.0.0",
+    "purescript-effect": "^4.0.0"
   },
   "devDependencies": {
-    "purescript-test-unit": "^15.0.0",
-    "purescript-aff": "^5.1.1",
-    "purescript-identity": "^4.1.0",
-    "purescript-newtype": "^3.0.0"
-  },
-  "resolutions": {
-    "purescript-quickcheck": "^6.0.0",
-    "purescript-record": "^2.0.0"
+    "purescript-test-unit": "^17.0.0",
+    "purescript-aff": "^7.0.0",
+    "purescript-identity": "^6.0.0",
+    "purescript-newtype": "^5.0.0"
   }
 }
